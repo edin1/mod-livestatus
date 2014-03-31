@@ -613,7 +613,7 @@ class LiveStatusQuery(object):
         """
         Get log from db (sqlite, mongo) and return and filtered Logline list
         """
-        firstdb = [x for x in self.db.get_live_data_log()]
+        firstdb = self.db.get_live_data_log()
         # Every Logline is linked to its host/service then filtered (not efficient at all)
         dbresult = [z for z in (
             x.fill(self.datamgr) for x in firstdb
