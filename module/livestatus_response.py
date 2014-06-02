@@ -122,7 +122,13 @@ class LiveStatusResponse:
                             l.append(value.encode('utf-8', 'replace'))
                         except Exception:
                             l.append('')
-                lines.append(self.separators[1].join(l))
+                cells = []
+                for x in l:
+                    cell = str(x)
+                    if self.separators[1] in cell or '"' in cell:
+                        cell = '"%s"'%cell.replace('"', '""')
+                    cells.append(cell)
+                lines.append(self.separators[1].join(cells))
             if len(lines) > 0:
                 if self.columnheaders != 'off' or not query_with_columns:
                     if len(aliases) > 0:
